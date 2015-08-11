@@ -37,5 +37,4 @@ public class Smileys {
         }
         System.out.println("");
     }
-
 }
