@@ -22,7 +22,7 @@ public class TextUserInterface {
         startStatements();
 
         while (true) {
-            System.out.println("");
+
             System.out.println("Statement:");
 
             String input = read.nextLine().trim();
@@ -45,6 +45,7 @@ public class TextUserInterface {
         System.out.println("add - adds a word pair to the dictionary");
         System.out.println("translate - asks a word and prints its translation");
         System.out.println("quit - quit the text user interface");
+        System.out.println("");
     }
 
     public void add() {
@@ -61,5 +62,4 @@ public class TextUserInterface {
         String key = dict.translate(finnishWord);
         System.out.println("Translation: " + key);
     }
-
 }
