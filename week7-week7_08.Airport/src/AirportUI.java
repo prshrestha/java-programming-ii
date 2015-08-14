@@ -102,7 +102,7 @@ public class AirportUI {
         String planeID = reader.nextLine();
         planeID = cleanString(planeID);
 
-        System.out.println("Give origin airport code: ");
+        System.out.println("Give departure airport code: ");
         String origin = reader.nextLine();
         origin = cleanString(origin);
 
@@ -148,6 +148,6 @@ public class AirportUI {
     }
 
     private String cleanString(String word) {
-        return word.trim().toLowerCase();
+        return word.trim();
     }
 }
