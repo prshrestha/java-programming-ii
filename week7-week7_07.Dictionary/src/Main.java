@@ -12,6 +12,8 @@ public class Main {
                 + "add\n" + "computer\n" + "tietokone\n"
                 + "add\n" + "auto\n" + "car\n"
                 + "translate\n" + "auto\n"
+                + "translate\n" + "nissan\n"
+                + "translate\n" + "book\n"
                 + "quit\n";
 
         Scanner reader = new Scanner(input);
