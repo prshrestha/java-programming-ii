@@ -10,8 +10,7 @@ public class RegistrationPlate {
         this.regCode = regCode;
         this.country = country;
     }
-    
-    
+        
     public String getCountry(){
         return this.country;
     }
