@@ -6,8 +6,8 @@
 
 public class Book implements ToBeStored {
 
-    private String writer, name;
-    private double weight;
+    private final String writer, name;
+    private final double weight;
 
     public Book(String writer, String name, double weight) {
         this.writer = writer;
