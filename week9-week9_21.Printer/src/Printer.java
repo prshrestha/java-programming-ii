@@ -18,13 +18,13 @@ public class Printer {
 
     public Printer(String fileName) throws Exception {
         this.file = new File(fileName);
-        r = new Scanner(this.file);
     }
 
-    public void printLinesWhichContain(String word) {
+    public void printLinesWhichContain(String word) throws Exception {
+        r = new Scanner(this.file);
         while (r.hasNextLine()) {
             String s = r.nextLine();
-            if (s.contains(word)){
+            if (s.contains(word)) {
                 System.out.println(s);
             }
         }
