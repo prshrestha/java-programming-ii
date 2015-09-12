@@ -11,8 +11,7 @@ public class Main {
         remover.add("ap");
         remover.add("ap");
         remover.add("gorilla");
-        
-        
+
         System.out.println("Current number of duplicates: "
                 + remover.getNumberOfDetectedDuplicates());
 
@@ -23,7 +22,7 @@ public class Main {
         remover.add("new");
         remover.add("ap");
         remover.add("gorilla");
-        
+
         System.out.println("Current number of duplicates: "
                 + remover.getNumberOfDetectedDuplicates());
 
@@ -37,6 +36,5 @@ public class Main {
 
         System.out.println("Unique characterStrings: "
                 + remover.getUniqueCharacterStrings());
-
     }
 }
