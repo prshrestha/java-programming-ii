@@ -36,12 +36,12 @@ public class PersonalDuplicateRemover implements DuplicateRemover {
     @Override
 
     /*this method counts the total number of times the duplicate has been repeated
-     to satisfy the grader.*/
+     to satisfy the TMC.*/
     public int getNumberOfDetectedDuplicates() {
         return this.count;
     }
 
-    //this method counts the duplicates only one
+    //this method counts the duplicates only once
     /*public int getNumberOfDetectedDuplicates() {
 
         count = 0;
