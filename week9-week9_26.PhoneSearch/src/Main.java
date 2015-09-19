@@ -29,20 +29,21 @@ public class Main {
             } else if (userInput.equalsIgnoreCase("2")) {
                 System.out.println("whose number:");
                 String inputName = reader.nextLine();
-
                 searchNumber(inputName, contactBook);
             } else if (userInput.equalsIgnoreCase("3")) {
                 System.out.println("number:");
                 String inputNumber = reader.nextLine();
-
                 searchName(inputNumber, contactBook);
             } else if (userInput.equalsIgnoreCase("4")) {
                 addAddress(reader, contactBook);
             } else if (userInput.equalsIgnoreCase("5")) {
                 System.out.println("whose information:");
                 String inputName = reader.nextLine();
-
                 searchNumberAndAddress(inputName, contactBook);
+            } else if (userInput.equalsIgnoreCase("6")) {
+                System.out.println("whose information:");
+                String inputName = reader.nextLine();
+                deleteNumberAndAddress(inputName, contactBook);
             }
         }
     }
@@ -52,7 +53,7 @@ public class Main {
         System.out.println("phone search\n"
                 + "available operations:\n"
                 + " 1 add a number\n"
-                + " 2 search for a number\n"
+                + " 2 search for a number of a person\n"
                 + " 3 search for a person by phone number\n"
                 + " 4 add an address\n"
                 + " 5 search for personal information\n"
@@ -67,42 +68,46 @@ public class Main {
         String inputName = reader.nextLine();
 
         contactBook.addContact(inputName);
-        
+
         System.out.println("number:");
         String inputNumber = reader.nextLine();
 
         List<String> numberList = new ArrayList<String>();
-        numberList.add(inputNumber);
 
         for (Contact c : contactBook.getContacts()) {
             if (c.getName().equalsIgnoreCase(inputName)) {
-                c.addNumber(numberList);
-                return;
+                if (c.getNumber() == null) {
+                    numberList.add(inputNumber);
+                    c.addNumber(numberList);
+                    return;
+                } else {
+                    numberList = c.getNumber();
+                    numberList.add(inputNumber);
+                    c.addNumber(numberList);
+                    return;
+                }
             }
         }
     }
 
-//this method searches the phone number of the contact by its name
+    //this method searches the phone number of the contact by its name
     private static void searchNumber(String name, ContactBook contactBook) {
-
         for (Contact c : contactBook.getContacts()) {
             if (c.getName().equalsIgnoreCase(name)) {
-                /*for (String number : c.getNumber()) {
-                 System.out.println(number);
-                 return;
-                 }*/
-                System.out.println(c.getNumber());
+                for (int i = 0; i < c.getNumber().size(); i++) {
+                    System.out.println("[" + c.getNumber().get(i) + "]");
+                }
                 return;
             }
         }
         System.out.println("not found");
     }
 
-    //this method searches name of the contact by its phone number
+//this method searches name of the contact by its phone number
     private static void searchName(String number, ContactBook contactBook) {
         for (Contact c : contactBook.getContacts()) {
             if (c.getNumber().contains(number)) {
-                System.out.println(c.getName());
+                System.out.println(c.getName().toUpperCase());
                 return;
             }
         }
@@ -125,9 +130,7 @@ public class Main {
         //contactBook.addContact(inputName, null, address);
         for (Contact c : contactBook.getContacts()) {
             if (c.getName().equalsIgnoreCase(inputName)) {
-                //contactBook.addContact(inputName, c.getNumber(), address);
                 c.addAdress(address);
-                //contactBook.addContact(c.getName(), c.getNumber(), address);
             }
         }
     }
@@ -136,21 +139,23 @@ public class Main {
     private static void searchNumberAndAddress(String name, ContactBook contactBook) {
         for (Contact c : contactBook.getContacts()) {
             if (c.getName().equalsIgnoreCase(name)) {
-                /*for (String number : c.getNumber()) {
-                 System.out.println(number);
-                 }
-                 System.out.println(c.getAddress());
-                 }*/
-                System.out.println(c.getNumber());
-                System.out.println(c.getAddress());
+                for (int i = 0; i < c.getNumber().size(); i++) {
+                    System.out.println("[" + c.getNumber().get(i) + "]");
+                }
+                System.out.println(c.getAddress().toUpperCase());
+                return;
+            }
+            System.out.println("not found");
+        }
+    }
+
+    private static void deleteNumberAndAddress(String name, ContactBook contactBook) {
+        for (Contact c : contactBook.getContacts()) {
+            if (c.getName().equalsIgnoreCase(name)) {
+                c.deleteContact();
                 return;
             }
             System.out.println("not found");
         }
     }
 }
-
-
-
-
-

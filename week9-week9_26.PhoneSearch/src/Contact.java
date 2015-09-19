@@ -45,6 +45,13 @@ public class Contact {
     public String getAddress(){
         return this.contactAddress;
     }
+    
+    //delete phone numbers and address
+    public void deleteContact(){
+        this.contactNumber = null;
+        this.contactAddress = null;
+        //this.contactName = null;
+    }
 }
 
 
