@@ -1,4 +1,3 @@
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,11 +19,15 @@ public class ContactBook {
         this.contactBook = new ArrayList<Contact>();
     }
 
-    public void addContact(String name, List<String> number, String address) {
-        contact = new Contact(name, number, address);
-        this.contactBook.add(contact);
+    //this method adds contact to contactbook
+    public void addContact(String name) {
+        contact = new Contact(name);
+        if (!contactBook.contains(contact)) {
+            this.contactBook.add(contact);
+        }
     }
-
+    
+    //this method returns all the contact
     public List<Contact> getContacts() {
         return this.contactBook;
     }

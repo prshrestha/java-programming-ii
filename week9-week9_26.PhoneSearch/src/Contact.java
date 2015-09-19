@@ -1,4 +1,4 @@
-
+import java.util.ArrayList;
 import java.util.List;
 
 /*
@@ -13,13 +13,24 @@ import java.util.List;
  */
 public class Contact {
     
-    private final String contactName;
-    private final List<String> contactNumber;
+    private String contactName;
+    private List<String> contactNumber;
     private String contactAddress;
     
-    public Contact(String name, List<String> number, String address){
+    public Contact(String name){
         this.contactName = name;
+        //this.contactNumber = number;
+        //this.contactAddress = address;
+    }
+    
+    
+    //this method adds name and phone number to the contact
+    public void addNumber(List<String> number){
+        //this.contactName = name;
         this.contactNumber = number;
+    }
+    //this method adds address to the contact
+    public void addAdress(String address){
         this.contactAddress = address;
     }
     
@@ -35,3 +46,6 @@ public class Contact {
         return this.contactAddress;
     }
 }
+
+
+
