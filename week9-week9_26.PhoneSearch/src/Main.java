@@ -53,7 +53,7 @@ public class Main {
         System.out.println("phone search\n"
                 + "available operations:\n"
                 + " 1 add a number\n"
-                + " 2 search for a number of a person\n"
+                + " 2 search for a number\n"
                 + " 3 search for a person by phone number\n"
                 + " 4 add an address\n"
                 + " 5 search for personal information\n"
@@ -107,7 +107,7 @@ public class Main {
     private static void searchName(String number, ContactBook contactBook) {
         for (Contact c : contactBook.getContacts()) {
             if (c.getNumber().contains(number)) {
-                System.out.println(c.getName().toUpperCase());
+                System.out.println(c.getName());
                 return;
             }
         }
@@ -116,8 +116,15 @@ public class Main {
 
     //this method adds address to the contact
     private static void addAddress(Scanner reader, ContactBook contactBook) {
-        System.out.println("whose information:");
+        System.out.println("whose address:");
         String inputName = reader.nextLine();
+
+        for (Contact c : contactBook.getContacts()) {
+            if (!c.getName().equalsIgnoreCase(inputName)) {
+                System.out.println("not found");
+                return;
+            }
+        }
 
         System.out.println("street:");
         String inputStreet = reader.nextLine();
@@ -136,13 +143,14 @@ public class Main {
     }
 
     //this method searches for both the phone number and the address of the contact
+
     private static void searchNumberAndAddress(String name, ContactBook contactBook) {
         for (Contact c : contactBook.getContacts()) {
             if (c.getName().equalsIgnoreCase(name)) {
                 for (int i = 0; i < c.getNumber().size(); i++) {
                     System.out.println("[" + c.getNumber().get(i) + "]");
                 }
-                System.out.println(c.getAddress().toUpperCase());
+                System.out.println(c.getAddress());
                 return;
             }
             System.out.println("not found");
