@@ -134,23 +134,34 @@ public class Main {
 
         String address = inputStreet + " " + inputCity;
 
-        //contactBook.addContact(inputName, null, address);
+        List<String> addressList = new ArrayList<String>();
+
         for (Contact c : contactBook.getContacts()) {
             if (c.getName().equalsIgnoreCase(inputName)) {
-                c.addAdress(address);
+                if (c.getAddress() == null) {
+                    addressList.add(address);
+                    c.addAdress(addressList);
+                    return;
+                } else {
+                    addressList = c.getAddress();
+                    addressList.add(address);
+                    c.addAdress(addressList);
+                    return;
+                }
             }
         }
     }
 
     //this method searches for both the phone number and the address of the contact
-
     private static void searchNumberAndAddress(String name, ContactBook contactBook) {
         for (Contact c : contactBook.getContacts()) {
             if (c.getName().equalsIgnoreCase(name)) {
                 for (int i = 0; i < c.getNumber().size(); i++) {
                     System.out.println("[" + c.getNumber().get(i) + "]");
                 }
-                System.out.println(c.getAddress());
+                for (int i = 0; i < c.getAddress().size(); i++) {
+                    System.out.println("[" + c.getAddress().get(i) + "]");
+                }
                 return;
             }
             System.out.println("not found");
@@ -160,7 +171,8 @@ public class Main {
     private static void deleteNumberAndAddress(String name, ContactBook contactBook) {
         for (Contact c : contactBook.getContacts()) {
             if (c.getName().equalsIgnoreCase(name)) {
-                c.deleteContact();
+                c.getNumber().clear();
+                c.getAddress().clear();
                 return;
             }
             System.out.println("not found");

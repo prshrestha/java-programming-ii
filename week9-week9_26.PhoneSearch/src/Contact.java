@@ -15,7 +15,7 @@ public class Contact {
     
     private String contactName;
     private List<String> contactNumber;
-    private String contactAddress;
+    private List<String> contactAddress;
     
     public Contact(String name){
         this.contactName = name;
@@ -30,7 +30,7 @@ public class Contact {
         this.contactNumber = number;
     }
     //this method adds address to the contact
-    public void addAdress(String address){
+    public void addAdress(List<String> address){
         this.contactAddress = address;
     }
     
@@ -42,16 +42,16 @@ public class Contact {
         return this.contactNumber;
     }
     
-    public String getAddress(){
+    public List<String> getAddress(){
         return this.contactAddress;
     }
     
     //delete phone numbers and address
-    public void deleteContact(){
+    /*public void deleteContact(){
         this.contactNumber = null;
         this.contactAddress = null;
         //this.contactName = null;
-    }
+    }*/
 }
 
 
