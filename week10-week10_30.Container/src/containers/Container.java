@@ -3,7 +3,7 @@ package containers;
 public class Container {
 
     private double capacity;
-    private double volume;
+    public double volume;
 
     public Container(double tilavuus) {
         if (tilavuus > 0.0) {
