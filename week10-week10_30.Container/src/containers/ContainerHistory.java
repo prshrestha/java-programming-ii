@@ -18,60 +18,60 @@ public class ContainerHistory {
     private List<Double> state;
 
     public ContainerHistory() {
-        state = new ArrayList<Double>();
+        this.state = new ArrayList<Double>();
     }
 
     public void add(double situation) {
-        state.add(situation);
+        this.state.add(situation);
     }
 
     public void reset() {
-        state.clear();
+        this.state.clear();
     }
 
     public String toString() {
-        return state.toString();
+        return this.state.toString();
     }
 
     //this method retuns the max value from the state arraylist
     public double maxValue() {
-        return Collections.max(state);
+        return Collections.max(this.state);
     }
 
     //this method returns the min value from the state arraylist
     public double minValue() {
-        return Collections.min(state);
+        return Collections.min(this.state);
     }
 
     //returns average of the values from state arraylist
     public double average() {
         double mean = 0;
-        if (state.isEmpty()) {
+        if (this.state.isEmpty()) {
             return mean;
         } else {
-            for (double state1 : state) {
+            for (double state1 : this.state) {
                 mean += state1;
             }
         }
-        return mean / state.size();
+        return mean / this.state.size();
     }
 
     //returns the max fluctuation between two numbers in arraylist
     public double greatestFluctuation() {
         double maxFluctuation = 0;
         List<Double> maxFluctuate = new ArrayList<Double>();
-        if (state.isEmpty() || state.size() == 1) {
+        if (this.state.isEmpty() || this.state.size() == 1) {
             return maxFluctuation;
         } else {
-            for (int i = 0; i < state.size(); i++) {
-                if (i != state.size() - 1) {
-                    double firstNumber = state.get(i);
-                    double secondNumber = state.get(i + 1);
+            for (int i = 0; i < this.state.size(); i++) {
+                if (i != this.state.size() - 1) {
+                    double firstNumber = this.state.get(i);
+                    double secondNumber = this.state.get(i + 1);
                     maxFluctuation = secondNumber - firstNumber;
                     maxFluctuate.add(maxFluctuation);
                 } else {
-                    double firstNumber = state.get(i - 1);
-                    double secondNumber = state.get(i);
+                    double firstNumber = this.state.get(i - 1);
+                    double secondNumber = this.state.get(i);
                     maxFluctuation = secondNumber - firstNumber;
                     maxFluctuate.add(maxFluctuation);
                 }

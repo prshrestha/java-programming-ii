@@ -16,7 +16,7 @@ public class ProductContainerRecorder extends ProductContainer {
     public ProductContainerRecorder(String productName, double capacity, double initialVolume) {
         super(productName, capacity);
         this.containerH = new ContainerHistory();
-        //this.initialVolume = initialVolume;
+        this.addToTheContainer(initialVolume);
     }
 
     public String history() {

@@ -12,20 +12,19 @@ public class Container {
             this.capacity = 0.0;
         }
 
-        volume = 0.0;
+        this.volume = 0.0;
     }
 
-
     public double getVolume() {
-        return volume;
+        return this.volume;
     }
 
     public double getOriginalCapacity() {
-        return capacity;
+        return this.capacity;
     }
 
     public double getCurrentCapacity() {
-        return capacity - volume;
+        return this.capacity - this.volume;
     }
 
     public void addToTheContainer(double amount) {
@@ -33,9 +32,9 @@ public class Container {
             return;
         }
         if (amount <= getCurrentCapacity()) {
-            volume = volume + amount;
+            this.volume += amount;
         } else {
-            volume = capacity;
+            this.volume = this.capacity;
         }
     }
 
@@ -44,17 +43,17 @@ public class Container {
             return 0.0;
         }
         if (amount > volume) {
-            double everything = volume;
-            volume = 0.0;
-            return everything;
+            double takeFromContainer = this.volume;
+            this.volume = 0.0;
+            return takeFromContainer;
+        } else {
+            this.volume -= amount;
+            return amount;
         }
-
-        volume = volume - amount;
-        return amount;
     }
 
     @Override
     public String toString() {
-        return "volume = " + volume + ", free space " + getCurrentCapacity();
+        return "volume = " + this.volume + ", free space " + getCurrentCapacity();
     }
 }

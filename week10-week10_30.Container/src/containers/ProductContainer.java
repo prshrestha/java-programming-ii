@@ -30,5 +30,4 @@ public class ProductContainer extends Container {
     public String toString() {
         return this.productName + ": volume = " + volume + ", free space " + getCurrentCapacity();
     }
-
 }
