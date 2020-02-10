@@ -1,0 +1,218 @@
+package dungeon;
+
+import java.util.*;
+
+public class Dungeon {
+    private int length;
+    private int height;
+    private int vampires;
+    private int moves;
+    private boolean vampiresMove;
+    private char[][] map;
+    private Scanner reader;
+    private List<Character> stringOfMoves;
+    
+    public Dungeon(int length, int height, int vampires, int moves, boolean vampiresMove){
+        this.length = length;
+        this.height = height;
+        this.vampires = vampires;
+        this.moves = moves;
+        this.vampiresMove = vampiresMove;
+        this.map = new char[this.length][this.height];
+        this.reader = new Scanner(System.in);
+        this.stringOfMoves = new ArrayList<>();
+    }
+    
+    public void run(){
+        drawDungeon();
+        players();
+        System.out.println(movesLeft());
+        System.out.println();
+        initialPositions();
+        printDungeon();
+    
+        String readMoves = "";
+
+        while (true) {
+            if(this.vampires == 0){
+                System.out.println("\nYou win!");
+                break;
+            }else if(this.moves == 0){
+                System.out.println("\nYou lose...");
+                break;
+            }
+            
+            readMoves = this.reader.nextLine();
+            for (int i = 0; i < readMoves.length(); i++) {
+                this.stringOfMoves.add(readMoves.charAt(i));
+            }
+
+            movement(this.stringOfMoves);
+            getVampires();
+            vampireMovement(this.stringOfMoves);
+            System.out.println();
+            this.moves--;
+            System.out.println(movesLeft());
+            System.out.println();
+            initialPositions();
+            printDungeon();
+        }
+    }
+
+    public void drawDungeon() {
+        for (int i = 0; i < this.length; i++) {
+            for (int j = 0; j < this.height; j++) {
+                this.map[i][j] = '.';
+            }
+        }
+    }
+    
+    public void players() {
+        Random random = new Random();
+
+        this.map[0][0] = '@';
+
+        for (int k = 0; k < this.vampires; k++) {
+            this.map[random.nextInt(this.length)][random.nextInt(this.height)] = 'V';
+            
+            if(this.map[0][0] == 'V'){
+                this.map[0][0] = '@';
+                this.map[random.nextInt(this.length)][random.nextInt(this.height)] = 'V';
+            }
+        }
+    }
+
+    public void printDungeon(){
+        for(int i = 0; i < this.length; i++){
+            for(int j = 0; j < this.height; j++){
+                System.out.print(this.map[i][j]);
+            }
+            
+            System.out.println();
+        }
+    }
+    
+    public int movesLeft(){
+        return this.moves;
+    }
+    
+    public int getVampires(){
+        int count = 0;
+        for(int i = 0; i < this.length; i++){
+            for(int j = 0; j < this.height; j++){
+                if(this.map[i][j] == 'V'){
+                    count++;
+                }
+            }
+        }
+        
+        if(count < this.vampires){
+            this.vampires = count;
+        }
+        
+        return this.vampires;
+    }
+    
+    public void initialPositions(){
+        for(int i = 0; i < this.length; i++){
+            for(int j = 0; j < this.height; j++){
+                if(this.map[i][j] == '@'){
+                    System.out.println("@: " + i + " " + j);
+                    break;
+                }
+            }
+        }
+        
+        for(int k = 0; k < this.length; k++){
+            for(int l = 0; l < this.height; l++){
+                if(this.map[k][l] == 'V'){
+                    System.out.println("V: " + k + " " + l);
+                }
+            }
+        }
+        
+        System.out.println();
+    }
+
+    public void movement(List<Character> moves) {
+        for (char x : moves) {
+            if (x == 'w') {
+                moveUp();
+            } else if (x == 'a') {
+                moveLeft();
+            } else if (x == 's') {
+                moveDown();
+            } else if (x == 'd') {
+                moveRight();
+            }
+        }
+        
+        moves.clear();
+    }
+
+    public void moveUp() {
+        for (int k = 0; k < this.height; k++) {
+            for (int j = 0; j < this.length; j++) {
+                if (this.map[j][k] == '@') {
+                    this.map[j - 1][k] = '@';
+                    this.map[j][k] = '.';
+                    break;
+                }
+            }
+        }
+    }
+    
+    public void moveLeft() {
+        for (int k = 0; k < this.length; k++) {
+            for (int j = 0; j < this.height; j++) {
+                if (this.map[k][j] == '@') {
+                    this.map[k][j - 1] = '@';
+                    this.map[k][j] = '.';
+                    break;
+                }
+            }
+        }
+    }
+
+    public void moveRight() {
+        for (int k = 0; k < this.length; k++) {
+            for (int j = 0; j < this.height; j++) {
+                if (this.map[k][j] == '@') {
+                    this.map[k][j + 1] = '@';
+                    this.map[k][j] = '.';
+                    break;
+                }
+            }
+        }
+    }
+
+    public void moveDown() {
+        for (int k = 0; k < this.height; k++) {
+            for (int j = 0; j < this.length; j++) {
+                if (this.map[j][k] == '@') {
+                    this.map[j + 1][k] = '@';
+                    this.map[j][k] = '.';
+                    break;
+                }
+            }
+        }
+    }
+    
+    public void vampireMovement(List<Character> moves) {
+        Random random = new Random();
+        
+        this.vampiresMove = true;
+        while (this.vampiresMove == true) {
+            for (int k = 0; k < this.height; k++) {
+                for (int j = 0; j < this.length; j++) {
+                    if (this.map[j][k] == 'V') {
+                        this.map[random.nextInt(this.length)][random.nextInt(this.height)] = 'V';
+                        this.map[j][k] = '.';
+                    }
+                }
+            }
+            
+            this.vampiresMove = false;
+        }
+    }
+}
